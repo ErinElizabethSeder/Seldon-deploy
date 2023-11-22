@@ -2,7 +2,7 @@ environment = "seldon"
 
 import yaml
 import prefect
-from prefect import task
+from prefect import task, flow, tags
 from kubernetes import client, config
 
 seldon_deployment = """
