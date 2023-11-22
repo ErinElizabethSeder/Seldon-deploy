@@ -49,7 +49,7 @@ seldon_deployment = """
 
 CUSTOM_RESOURCE_INFO = dict(
     group="machinelearning.seldon.io",
-    version="v1alpha2",
+    version="v1alpha3",
     plural="seldondeployments",
 )
 
