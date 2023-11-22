@@ -6,7 +6,7 @@ from prefect import task, flow, tags, get_run_logger
 from kubernetes import client, config
 
 seldon_deployment = """
-    apiVersion: machinelearning.seldon.io/v1alpha2
+    apiVersion: machinelearning.seldon.io/v1alpha3
     kind: SeldonDeployment
     metadata:
       name: wines-classifier
