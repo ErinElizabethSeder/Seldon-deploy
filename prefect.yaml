@@ -1,0 +1,28 @@
+# Generic metadata about this project
+name: flows2
+prefect-version: 2.13.8
+# deployments section allows you to provide configuration for deploying flows
+deployments:
+- name: tests
+  schedule:
+#  entrypoint: flows/hello.py:hello
+  entrypoint: flows/modelserve.py:DeployModel
+  work_pool:
+    name: test-kube
+    work_queue_name:
+    job_variables: {}
+    image: docker.io/prefecthq/prefect:2-latest
+  version:
+  tags: []
+  description:
+  parameters: {}
+  pull:
+  - prefect.deployments.steps.set_working_directory:
+      directory: /opt/prefect
+  - prefect.deployments.steps.git_clone:
+     id: clone-step
+     repository: https://github.com/ErinElizabethSeder/Seldon-deploy.git
+#  - prefect.deployments.steps.pip_install_requirements:
+#     directory: "{{ clone-step.directory }}/flows"
+#     requirements_file: requirements.txt
+#     stream_output: False
