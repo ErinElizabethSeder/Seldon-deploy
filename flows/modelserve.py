@@ -92,8 +92,10 @@ def deploy_model(model_uri: str, namespace: str = "seldon"):
 @flow
 def DeployModel(model_uri: str = "Train"):
       deploy_model(model_uri, namespace="seldon")
-
+def DeploySecondModel(model_uri: str = "Train"):
+      deploy_model(model_uri, namespace="seldon")
 
 if __name__ == "__main__":
     with tags("test1"):
-        DeployModel()
+        #DeployModel()
+        DeploySecondModel()
