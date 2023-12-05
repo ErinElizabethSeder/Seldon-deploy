@@ -9,7 +9,7 @@ seldon_deployment = """
     apiVersion: machinelearning.seldon.io/v1alpha3
     kind: SeldonDeployment
     metadata:
-      name: test
+      name: test2
       namespace: seldon
     spec:
       predictors:
@@ -18,7 +18,7 @@ seldon_deployment = """
           implementation: MLFLOW_SERVER
           modelUri: dummy
           name: test
-        name: model-a
+        name: model-a2
         replicas: 1
         traffic: 100
         componentSpecs:
@@ -26,7 +26,7 @@ seldon_deployment = """
             # We are setting high failureThreshold as installing conda dependencies
             # can take long time and we want to avoid k8s killing the container prematurely
             containers:
-            - name: wines-classifier
+            - name: test22
               livenessProbe:
                 initialDelaySeconds: 60
                 failureThreshold: 100
