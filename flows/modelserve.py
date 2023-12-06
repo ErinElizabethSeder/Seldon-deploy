@@ -25,25 +25,6 @@ spec:
         - spec:
             containers:
               - name: test22
-                livenessProbe:
-                  initialDelaySeconds: 60
-                  failureThreshold: 100
-                  periodSeconds: 5
-                  successThreshold: 1
-                  httpGet:
-                    path: /health/ping
-                    port: http
-                    scheme: HTTP
-                readinessProbe:
-                  initialDelaySeconds: 60
-                  failureThreshold: 100
-                  periodSeconds: 5
-                  successThreshold: 1
-                  httpGet:
-                    path: /health/ping
-                    port: http
-                    scheme: HTTP
-
 """
 
 CUSTOM_RESOURCE_INFO = dict(
