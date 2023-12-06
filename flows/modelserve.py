@@ -23,8 +23,6 @@ spec:
       traffic: 100
       componentSpecs:
         - spec:
-            containers:
-              - name: test22
 """
 
 CUSTOM_RESOURCE_INFO = dict(
