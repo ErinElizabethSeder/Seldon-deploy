@@ -6,23 +6,46 @@ from prefect import task, flow, tags, get_run_logger
 from kubernetes import client, config
 
 seldon_deployment = """
-apiVersion: machinelearning.seldon.io/v1alpha3
+apiVersion: machinelearning.seldon.io/v1alpha2
 kind: SeldonDeployment
 metadata:
-  name: test2
-  namespace: seldon
+  name: mlflow
 spec:
+  name: wines
   predictors:
-    - graph:
-        children: []
-        implementation: MLFLOW_SERVER
-        modelUri: dummy
-        name: test
-      name: model-a2
-      replicas: 1
-      traffic: 100
-      componentSpecs:
-        - spec:
+  - componentSpecs:
+    - spec:
+        # We are setting high failureThreshold as installing conda dependencies
+        # can take long time and we want to avoid k8s killing the container prematurely
+        containers:
+        - name: classifier
+          livenessProbe:
+            initialDelaySeconds: 80
+            failureThreshold: 200
+            periodSeconds: 5
+            successThreshold: 1
+            httpGet:
+              path: /health/ping
+              port: http
+              scheme: HTTP
+          readinessProbe:
+            initialDelaySeconds: 100
+            failureThreshold: 300
+            periodSeconds: 5
+            successThreshold: 1
+            httpGet:
+              path: /health/ping
+              port: http
+              scheme: HTTP
+    graph:
+      children: []
+      implementation: MLFLOW_SERVER
+      modelUri: s3://mlflow/1/bea65707b313480090350c83bc95a77c/artifacts/model
+      envSecretRefName: bpk-seldon-init-container-secret
+#      envSecretRefName: seldon-init-container-secret
+      name: classifier
+    name: default
+    replicas: 1
 """
 
 CUSTOM_RESOURCE_INFO = dict(
