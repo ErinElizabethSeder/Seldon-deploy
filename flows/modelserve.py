@@ -29,8 +29,8 @@ spec:
               port: http
               scheme: HTTP
           readinessProbe:
-            initialDelaySeconds: 100
-            failureThreshold: 300
+            initialDelaySeconds: 500
+            failureThreshold: 500
             periodSeconds: 5
             successThreshold: 1
             httpGet:
