@@ -19,6 +19,11 @@ spec:
         # can take long time and we want to avoid k8s killing the container prematurely
         containers:
         - name: classifier
+          resources:
+            requests:
+              memory: "3Gi"
+            limits:
+              memory: "4Gi"
           livenessProbe:
             initialDelaySeconds: 500
             failureThreshold: 500
