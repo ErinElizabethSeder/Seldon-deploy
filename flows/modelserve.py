@@ -21,9 +21,9 @@ spec:
         - name: classifier
           resources:
             requests:
-              memory: "3Gi"
+              memory: "10Gi"
             limits:
-              memory: "4Gi"
+              memory: "12Gi"
           livenessProbe:
             initialDelaySeconds: 500
             failureThreshold: 500
