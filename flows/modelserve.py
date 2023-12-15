@@ -20,8 +20,8 @@ spec:
         containers:
         - name: classifier
           livenessProbe:
-            initialDelaySeconds: 80
-            failureThreshold: 200
+            initialDelaySeconds: 500
+            failureThreshold: 500
             periodSeconds: 5
             successThreshold: 1
             httpGet:
