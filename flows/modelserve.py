@@ -103,5 +103,5 @@ def demo_serve(model_uri: str = "Train"):
 if __name__ == "__main__":
     with tags("demo"):
         #DeployModel()
-        #DeploySecondModel()
-        deploy_model()
+        DeploySecondModel()
+        
