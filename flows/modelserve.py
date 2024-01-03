@@ -44,7 +44,7 @@ spec:
       envSecretRefName: bpk-seldon-init-container-secret
 #      envSecretRefName: seldon-init-container-secret
       name: classifier
-    name: default
+    name: demo
     replicas: 1
 """
 
@@ -96,8 +96,12 @@ def DeployModel(model_uri: str = "Train"):
 @flow    
 def DeploySecondModel(model_uri: str = "Train"):
       deploy_model(model_uri, namespace="seldon")
-
+@flow    
+def demo_serve(model_uri: str = "Train"):
+      deploy_model(model_uri, namespace="seldon")
+  
 if __name__ == "__main__":
-    with tags("test1"):
+    with tags("demo"):
         #DeployModel()
-        DeploySecondModel()
+        #DeploySecondModel()
+        deploy_model()
