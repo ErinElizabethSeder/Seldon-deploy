@@ -53,7 +53,13 @@ CUSTOM_RESOURCE_INFO = dict(
     version="v1alpha3",
     plural="seldondeployments",
 )
-
+@task
+def get_model_location(model_name):
+    mlflow.set_tracking_uri(variables.get('mlflow_tracking_uri'))
+    client = MlflowClient()
+    model_metadata = client.get_latest_versions(model_name)
+    latest_model_location = model_metadata[0].source
+    return latest_model_location
 @task
 def deploy_model(model_uri: str, serving_name: str, namespace: str = "seldon"):
     logger = get_run_logger()
@@ -92,7 +98,8 @@ def deploy_model(model_uri: str, serving_name: str, namespace: str = "seldon"):
         )
 
 @flow    
-def demo_serve(model_uri, serving_name):
+def demo_serve(model_name: str, serving_name:str):
+      model_uri = get_model_location(model_name)
       deploy_model(model_uri, serving_name, namespace="seldon")
   
 if __name__ == "__main__":
