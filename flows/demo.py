@@ -2,7 +2,7 @@ environment = "seldon"
 
 import yaml
 import prefect
-from prefect import task, flow, tags, get_run_logger
+from prefect import task, flow, tags, get_run_logger, variables
 from kubernetes import client, config
 import mlflow
 from mlflow import MlflowClient
