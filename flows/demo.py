@@ -4,6 +4,8 @@ import yaml
 import prefect
 from prefect import task, flow, tags, get_run_logger
 from kubernetes import client, config
+import mlflow
+from mlflow import MlflowClient
 
 seldon_deployment = """
 apiVersion: machinelearning.seldon.io/v1alpha3
