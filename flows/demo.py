@@ -17,6 +17,7 @@ spec:
   predictors:
   - componentSpecs:
     - spec:
+        protocol: v2
         # We are setting high failureThreshold as installing conda dependencies
         # can take long time and we want to avoid k8s killing the container prematurely
         containers:
